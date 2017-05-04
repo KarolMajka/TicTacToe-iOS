@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,10 +25,16 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3s-J4-ZL8">
                                 <rect key="frame" x="123" y="130" width="129" height="30"/>
                                 <state key="normal" title="Play on one device"/>
+                                <connections>
+                                    <segue destination="bvt-uS-rwT" kind="show" identifier="Player" id="sJH-sH-idN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eM-qG-Oo0">
                                 <rect key="frame" x="123" y="260" width="129" height="30"/>
                                 <state key="normal" title="Play with bot"/>
+                                <connections>
+                                    <segue destination="bvt-uS-rwT" kind="show" identifier="Bot" action="showDetailViewController:sender:" id="iSh-Qc-nJv"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3nP-Fc-phQ">
                                 <rect key="frame" x="123" y="390" width="129" height="30"/>
@@ -61,5 +68,42 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="k7d-EF-IbK">
+            <objects>
+                <viewController id="bvt-uS-rwT" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZW8-lU-IKa"/>
+                        <viewControllerLayoutGuide type="bottom" id="gFI-ZR-1zm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="A33-VJ-loV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2O-Dq-TPf">
+                                <rect key="frame" x="16" y="186" width="343" height="295"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="295" id="5sb-8u-TGp"/>
+                                    <constraint firstAttribute="width" constant="343" id="vmV-4F-Can"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="N2O-Dq-TPf" firstAttribute="trailing" secondItem="A33-VJ-loV" secondAttribute="trailingMargin" id="Jdx-zS-GgI"/>
+                            <constraint firstItem="N2O-Dq-TPf" firstAttribute="centerY" secondItem="A33-VJ-loV" secondAttribute="centerY" id="S2Y-Hc-Zsd"/>
+                            <constraint firstItem="N2O-Dq-TPf" firstAttribute="leading" secondItem="A33-VJ-loV" secondAttribute="leadingMargin" id="YAw-O4-Pwz"/>
+                            <constraint firstItem="N2O-Dq-TPf" firstAttribute="centerX" secondItem="A33-VJ-loV" secondAttribute="centerX" id="oqh-as-SEP"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J2N-gQ-VKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1213.5999999999999" y="138.98050974512745"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="sJH-sH-idN"/>
+    </inferredMetricsTieBreakers>
 </document>
