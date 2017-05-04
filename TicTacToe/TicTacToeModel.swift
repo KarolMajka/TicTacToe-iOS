@@ -44,11 +44,10 @@ enum PlayerEnum {
     }
 }
 
-class TicTacToeModel: NSObject {
+class TicTacToeModel {
     var fields: [FieldEnum] = []
     
-    override init() {
-        super.init()
+    init() {
         for _ in 0...8 {
             fields.append(FieldEnum.empty)
         }
