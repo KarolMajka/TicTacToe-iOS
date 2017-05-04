@@ -15,6 +15,7 @@
 		A3AE4FDC1EBB0D1500C0129E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3AE4FDA1EBB0D1500C0129E /* LaunchScreen.storyboard */; };
 		A3AE4FE71EBB0D1600C0129E /* TicTacToeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AE4FE61EBB0D1600C0129E /* TicTacToeTests.swift */; };
 		A3AE4FF21EBB0D1600C0129E /* TicTacToeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AE4FF11EBB0D1600C0129E /* TicTacToeUITests.swift */; };
+		A3AE50001EBB4EF000C0129E /* TicTacToeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AE4FFF1EBB4EF000C0129E /* TicTacToeModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		A3AE4FED1EBB0D1600C0129E /* TicTacToeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TicTacToeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3AE4FF11EBB0D1600C0129E /* TicTacToeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeUITests.swift; sourceTree = "<group>"; };
 		A3AE4FF31EBB0D1600C0129E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3AE4FFF1EBB4EF000C0129E /* TicTacToeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicTacToeModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				A3AE4FDA1EBB0D1500C0129E /* LaunchScreen.storyboard */,
 				A3AE4FDD1EBB0D1500C0129E /* Info.plist */,
 				A3AE4FD51EBB0D1500C0129E /* TicTacToe.xcdatamodeld */,
+				A3AE4FFF1EBB4EF000C0129E /* TicTacToeModel.swift */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3AE50001EBB4EF000C0129E /* TicTacToeModel.swift in Sources */,
 				A3AE4FD71EBB0D1500C0129E /* TicTacToe.xcdatamodeld in Sources */,
 				A3AE4FD11EBB0D1500C0129E /* ViewController.swift in Sources */,
 				A3AE4FCF1EBB0D1500C0129E /* AppDelegate.swift in Sources */,
