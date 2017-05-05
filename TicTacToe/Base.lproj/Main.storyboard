@@ -69,10 +69,10 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>
-        <!--View Controller-->
+        <!--Tic Tac Toe View Controller-->
         <scene sceneID="k7d-EF-IbK">
             <objects>
-                <viewController id="bvt-uS-rwT" sceneMemberID="viewController">
+                <viewController id="bvt-uS-rwT" customClass="TicTacToeViewController" customModule="TicTacToe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZW8-lU-IKa"/>
                         <viewControllerLayoutGuide type="bottom" id="gFI-ZR-1zm"/>

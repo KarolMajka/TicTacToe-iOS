@@ -46,10 +46,16 @@ enum PlayerEnum {
 
 class TicTacToeModel {
     var fields: [FieldEnum] = []
+    var currentMove: PlayerEnum = PlayerEnum.unknown
     
     init() {
         for _ in 0...8 {
             fields.append(FieldEnum.empty)
+        }
+        if Int(arc4random()) % 2 == 1 {
+            self.currentMove = PlayerEnum.crossPlayer
+        } else {
+            self.currentMove = PlayerEnum.circlePlayer
         }
     }
     
@@ -136,13 +142,13 @@ class TicTacToeModel {
         return combinations
     }
     
-    func checkWinner() -> PlayerEnum? {
+    func checkWinner() -> (PlayerEnum?, [Int]?) {
         for combination in getAllWinningCombinations() {
             if let winner = checkFields(position1: combination[0], position2: combination[1], position3: combination[2]) {
-                return winner
+                return (winner, combination)
             }
         }
-        return nil
+        return (nil, nil)
     }
     
     func isMoveAvailable() -> Bool {
@@ -152,6 +158,14 @@ class TicTacToeModel {
             }
         }
         return false
+    }
+    
+    func toggleCurrentMove() {
+        if self.currentMove == PlayerEnum.circlePlayer {
+            self.currentMove = PlayerEnum.crossPlayer
+        } else {
+            self.currentMove = PlayerEnum.circlePlayer
+        }
     }
     
 }

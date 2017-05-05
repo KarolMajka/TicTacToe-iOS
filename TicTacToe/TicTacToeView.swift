@@ -23,12 +23,12 @@ class TicTacToeView: UIView {
         self.createView()
     }
     
-    func createView() {
+    private func createView() {
         self.addView()
         self.addLines()
     }
     
-    func addView() {
+    private func addView() {
         let view = (Bundle.main.loadNibNamed("TicTacToeView", owner: self, options: nil)![0] as! UIView).subviews[0]
         view.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(view)
@@ -41,17 +41,15 @@ class TicTacToeView: UIView {
         self.addConstraints([centerX, centerY, widthConstraint, heightConstraint])
     }
     
-    func addLines() {
+    private func addLines() {
         self.addLine(from: CGPoint(x: self.mainView.frame.size.width/3, y: 0), to: CGPoint(x: self.mainView.frame.size.width/3, y: self.mainView.frame.size.height))
         self.addLine(from: CGPoint(x: self.mainView.frame.size.width/3*2, y: 0), to: CGPoint(x: self.mainView.frame.size.width/3*2, y: self.mainView.frame.size.height))
         
         self.addLine(from: CGPoint(x: 0, y: self.mainView.frame.size.height/3), to: CGPoint(x: self.mainView.frame.size.width, y: self.mainView.frame.size.height/3))
         self.addLine(from: CGPoint(x: 0, y: self.mainView.frame.size.height/3*2), to: CGPoint(x: self.mainView.frame.size.width, y: self.mainView.frame.size.height/3*2))
-        
-        self.setNeedsDisplay()
     }
     
-    func addLine(from: CGPoint, to: CGPoint) {
+    private func addLine(from: CGPoint, to: CGPoint) {
         let path = UIBezierPath()
         
         path.move(to: from)
@@ -68,4 +66,11 @@ class TicTacToeView: UIView {
         self.mainView.layer.addSublayer(layer)
     }
     
+    func drawCircle(in view: UIView) {
+        
+    }
+    
+    func drawCross(in view: UIView) {
+        
+    }
 }

@@ -18,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nl9-mL-7yc">
-                    <rect key="frame" x="0.0" y="145.5" width="375" height="375"/>
+                    <rect key="frame" x="0.0" y="146" width="375" height="375"/>
                     <subviews>
                         <view tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tc2-Ug-sOG">
                             <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
