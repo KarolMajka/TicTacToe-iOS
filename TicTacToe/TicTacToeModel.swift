@@ -45,8 +45,8 @@ enum PlayerEnum {
 }
 
 class TicTacToeModel {
-    var fields: [FieldEnum] = []
-    var currentMove: PlayerEnum = PlayerEnum.unknown
+    private var fields: [FieldEnum] = []
+    private var currentMove: PlayerEnum = PlayerEnum.unknown
     
     init() {
         for _ in 0...8 {
@@ -60,7 +60,7 @@ class TicTacToeModel {
     }
     
     
-    func getPosition(x: Int, y: Int) -> Int {
+    private func getPosition(x: Int, y: Int) -> Int {
         return y*3+x
     }
     
@@ -72,15 +72,40 @@ class TicTacToeModel {
         return fields[i]
     }
     
-    func setFieldAt(x: Int, y: Int, as fieldEnum: FieldEnum) {
+    private func setFieldAt(x: Int, y: Int, as fieldEnum: FieldEnum) {
         setField(at: getPosition(x: x, y: y), as: fieldEnum)
     }
     
-    func setField(at i: Int, as fieldEnum: FieldEnum) {
+    private func setField(at i: Int, as fieldEnum: FieldEnum) {
         self.fields[i] = fieldEnum
     }
     
-    func checkFields(position1: Int, position2: Int, position3: Int) -> PlayerEnum? {
+    private func playerEnumToFieldEnum(playerEnum: PlayerEnum) -> FieldEnum {
+        if PlayerEnum.circlePlayer == playerEnum {
+            return FieldEnum.circle
+        } else if PlayerEnum.crossPlayer == playerEnum {
+            return FieldEnum.cross
+        } else {
+            return FieldEnum.unknown
+        }
+    }
+    
+    func setField(at i: Int) -> Bool {
+        if self.getField(at: i) == FieldEnum.empty {
+            
+            self.setField(at: i, as: self.playerEnumToFieldEnum(playerEnum: self.currentMove))
+            self.toggleCurrentMove()
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func getCurrentMove() -> PlayerEnum {
+        return self.currentMove
+    }
+    
+    private func checkFields(position1: Int, position2: Int, position3: Int) -> PlayerEnum? {
        if getField(at: position1) == getField(at: position2) && getField(at: position1) == getField(at: position3) {
             let field = getField(at: position1)
             if field == FieldEnum.circle {
@@ -92,11 +117,11 @@ class TicTacToeModel {
         return nil
     }
     
-    func checkFields(x1: Int, y1: Int, x2: Int, y2: Int, x3: Int, y3: Int) -> PlayerEnum? {
+    private func checkFields(x1: Int, y1: Int, x2: Int, y2: Int, x3: Int, y3: Int) -> PlayerEnum? {
         return checkFields(position1: getPosition(x: x1, y: y1), position2: getPosition(x: x2, y: y2), position3: getPosition(x: x3, y: y3))
     }
     
-    func getAllWinningCombinations() -> [[Int]] {
+    private func getAllWinningCombinations() -> [[Int]] {
         var combinations: [[Int]] = []
         
         combinations.append([])
@@ -160,7 +185,7 @@ class TicTacToeModel {
         return false
     }
     
-    func toggleCurrentMove() {
+    private func toggleCurrentMove() {
         if self.currentMove == PlayerEnum.circlePlayer {
             self.currentMove = PlayerEnum.crossPlayer
         } else {
