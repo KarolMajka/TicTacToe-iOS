@@ -81,7 +81,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2O-Dq-TPf" customClass="TicTacToeView" customModule="TicTacToe" customModuleProvider="target">
+                            <view tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2O-Dq-TPf" customClass="TicTacToeView" customModule="TicTacToe" customModuleProvider="target">
                                 <rect key="frame" x="16" y="162" width="343" height="343"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -97,6 +97,9 @@
                             <constraint firstItem="N2O-Dq-TPf" firstAttribute="centerX" secondItem="A33-VJ-loV" secondAttribute="centerX" id="oqh-as-SEP"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mainView" destination="N2O-Dq-TPf" id="SLK-yr-qGU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J2N-gQ-VKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

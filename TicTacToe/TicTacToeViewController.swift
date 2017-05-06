@@ -11,10 +11,8 @@ import UIKit
 
 class TicTacToeViewController: UIViewController {
     
-    lazy var mainView: TicTacToeView = {
-        [unowned self] in
-        return self.view.viewWithTag(100) as! TicTacToeView
-    }()
+
+    @IBOutlet var mainView: TicTacToeView!
     var ticTacToe = TicTacToeModel()
     
     override func viewDidLoad() {
@@ -24,14 +22,14 @@ class TicTacToeViewController: UIViewController {
     }
     
     func setGestureRecognizers() {
-        for subview in self.mainView.subviews {
+        for subview in self.mainView.mainView.subviews {
             let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapSingleField(_:)))
             subview.addGestureRecognizer(tap)
         }
     }
     
     func tapSingleField(_ sender: UITapGestureRecognizer) {
-        for subview in self.mainView.subviews {
+        for subview in self.mainView.mainView.subviews {
             let tapPoint = sender.location(in: subview)
             let subviewSize = subview.frame.size
             if tapPoint.x > 0 && tapPoint.x < subviewSize.width && tapPoint.y > 0 && tapPoint.y < subviewSize.height {
