@@ -56,56 +56,62 @@ class TicTacToeView: UIView {
         path.addLine(to: to)
         path.close()
         
-        let layer = CAShapeLayer()
-        
-        layer.path = path.cgPath
-        layer.lineWidth = 4
-        layer.strokeColor = UIColor.blue.cgColor
-        layer.fillColor = UIColor.clear.cgColor
+        let layer = self.createLayer(forPath: path, color: UIColor.blue.cgColor)
         
         self.mainView.layer.addSublayer(layer)
     }
     
-    
-    
-    func drawCircle(in view: UIView) {
-        let size = self.mainView.subviews[0].frame.size
-        let circlePath = UIBezierPath(arcCenter: CGPoint(x: size.width/2,y: size.height/2), radius: CGFloat(size.height/3), startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true)
+    func createLayer(forPath path: UIBezierPath, color: CGColor) -> CAShapeLayer {
         let layer = CAShapeLayer()
-        layer.path = circlePath.cgPath
-        layer.strokeColor = UIColor.blue.cgColor
-        layer.fillColor = UIColor.clear.cgColor
+        
+        layer.path = path.cgPath
         layer.lineWidth = 4
-        //layer.strokeEnd = 0.0
-        view.layer.addSublayer(layer)
-
+        layer.strokeColor = color
+        layer.fillColor = UIColor.clear.cgColor
+        return layer
+    }
+    
+    func addAnimation(forLayer layer: CAShapeLayer) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.duration = 0.3
         animation.fromValue = 0
         animation.toValue = 1
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         layer.add(animation, forKey: "animate")
+    }
+    
+    func drawCircle(in view: UIView) {
+        let size = view.frame.size
         
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: size.width/2,y: size.height/2), radius: CGFloat(size.height/3), startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true)
         
+        let layer = self.createLayer(forPath: circlePath, color: UIColor.blue.cgColor)
+        //layer.strokeEnd = 0.0
+        view.layer.addSublayer(layer)
+        self.addAnimation(forLayer: layer)
     }
     
     
     func drawCross(in view: UIView) {
-        let size = self.mainView.subviews[0].frame.size
-        let crossPath1 = UIBezierPath
-        let layer = CAShapeLayer()
-        layer.path = crossPath1.cgPath
-        layer.strokeColor = UIColor.blue.cgColor
-        layer.fillColor = UIColor.clear.cgColor
-        layer.lineWidth = 4
-        //layer.strokeEnd = 0.0
-        //view.layer.addSublayer(layer)
+        let size = view.frame.size
         
-        let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.duration = 2.0
-        animation.fromValue = 0
-        animation.toValue = 1
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        layer.add(animation, forKey: "animate")
+        let crossPath1 = UIBezierPath()
+        crossPath1.move(to: CGPoint(x: size.width/4, y: size.height/4))
+        crossPath1.addLine(to: CGPoint(x: size.width*3/4, y: size.height*3/4))
+        crossPath1.close()
+        
+        let crossPath2 = UIBezierPath()
+        crossPath2.move(to: CGPoint(x: size.width*3/4, y: size.height/4))
+        crossPath2.addLine(to: CGPoint(x: size.width/4, y: size.height*3/4))
+        crossPath2.close()
+        
+        let layer1 = self.createLayer(forPath: crossPath1, color: UIColor.blue.cgColor)
+        view.layer.addSublayer(layer1)
+        
+        let layer2 = self.createLayer(forPath: crossPath2, color: UIColor.blue.cgColor)
+        view.layer.addSublayer(layer2)
+        
+        self.addAnimation(forLayer: layer1)
+        self.addAnimation(forLayer: layer2)
     }
 }
