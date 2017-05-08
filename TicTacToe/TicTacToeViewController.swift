@@ -40,11 +40,39 @@ class TicTacToeViewController: UIViewController {
     }
     
     func tapped(view: UIView) {
-        if self.ticTacToe.currentMove == PlayerEnum.circlePlayer {
+        if !self.ticTacToe.setField(at: view.tag-100) {
+            return
+        }
+        CATransaction.begin()
+        CATransaction.setCompletionBlock({
+            CATransaction.lock()
+            CATransaction.unlock()
+            let values = self.ticTacToe.checkWinner()
+            guard let playerEnum = values.0,
+                let combination = values.1 else {
+                    self.noWinner()
+                    return
+            }
+            self.restartGame()
+        })
+        
+        if self.ticTacToe.getCurrentMove() == PlayerEnum.crossPlayer {
             self.mainView.drawCircle(in: view)
         } else {
             self.mainView.drawCross(in: view)
         }
-        self.ticTacToe.toggleCurrentMove()
+        CATransaction.commit()
+
+    }
+    
+    func restartGame() {
+        self.ticTacToe = TicTacToeModel()
+        self.mainView.resetView()
+    }
+    
+    func noWinner() {
+        if !self.ticTacToe.isMoveAvailable() {
+            self.restartGame()
+        }
     }
 }

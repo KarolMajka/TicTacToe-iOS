@@ -50,30 +50,33 @@ class TicTacToeView: UIView {
     }
     
     private func addLine(from: CGPoint, to: CGPoint) {
+        let path = self.createLinePath(from: from, to: to)
+        let layer = self.createLayer(forPath: path.cgPath, color: UIColor.blue.cgColor)
+        self.mainView.layer.addSublayer(layer)
+    }
+    
+    private func createLinePath(from: CGPoint, to: CGPoint) -> UIBezierPath {
         let path = UIBezierPath()
         
         path.move(to: from)
         path.addLine(to: to)
         path.close()
-        
-        let layer = self.createLayer(forPath: path, color: UIColor.blue.cgColor)
-        
-        self.mainView.layer.addSublayer(layer)
+        return path
     }
     
-    func createLayer(forPath path: UIBezierPath, color: CGColor) -> CAShapeLayer {
+    private func createLayer(forPath path: CGPath, color: CGColor) -> CAShapeLayer {
         let layer = CAShapeLayer()
         
-        layer.path = path.cgPath
+        layer.path = path
         layer.lineWidth = 4
         layer.strokeColor = color
         layer.fillColor = UIColor.clear.cgColor
         return layer
     }
     
-    func addAnimation(forLayer layer: CAShapeLayer) {
+    private func addAnimation(forLayer layer: CAShapeLayer, duration: CFTimeInterval) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.duration = 0.3
+        animation.duration = duration
         animation.fromValue = 0
         animation.toValue = 1
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
@@ -85,33 +88,31 @@ class TicTacToeView: UIView {
         
         let circlePath = UIBezierPath(arcCenter: CGPoint(x: size.width/2,y: size.height/2), radius: CGFloat(size.height/3), startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true)
         
-        let layer = self.createLayer(forPath: circlePath, color: UIColor.blue.cgColor)
+        let layer = self.createLayer(forPath: circlePath.cgPath, color: UIColor.blue.cgColor)
         //layer.strokeEnd = 0.0
         view.layer.addSublayer(layer)
-        self.addAnimation(forLayer: layer)
+        self.addAnimation(forLayer: layer, duration: 0.3)
     }
     
     
     func drawCross(in view: UIView) {
         let size = view.frame.size
+        let crossPath = CGMutablePath()
+        let crossPath1 = self.createLinePath(from: CGPoint(x: size.width/4, y: size.height/4), to: CGPoint(x: size.width*3/4, y: size.height*3/4))
+        let crossPath2 = self.createLinePath(from: CGPoint(x: size.width*3/4, y: size.height/4), to: CGPoint(x: size.width/4, y: size.height*3/4))
         
-        let crossPath1 = UIBezierPath()
-        crossPath1.move(to: CGPoint(x: size.width/4, y: size.height/4))
-        crossPath1.addLine(to: CGPoint(x: size.width*3/4, y: size.height*3/4))
-        crossPath1.close()
+        crossPath.addPath(crossPath1.cgPath)
+        crossPath.addPath(crossPath2.cgPath)
         
-        let crossPath2 = UIBezierPath()
-        crossPath2.move(to: CGPoint(x: size.width*3/4, y: size.height/4))
-        crossPath2.addLine(to: CGPoint(x: size.width/4, y: size.height*3/4))
-        crossPath2.close()
-        
-        let layer1 = self.createLayer(forPath: crossPath1, color: UIColor.blue.cgColor)
-        view.layer.addSublayer(layer1)
-        
-        let layer2 = self.createLayer(forPath: crossPath2, color: UIColor.blue.cgColor)
-        view.layer.addSublayer(layer2)
-        
-        self.addAnimation(forLayer: layer1)
-        self.addAnimation(forLayer: layer2)
+        let layer = self.createLayer(forPath: crossPath, color: UIColor.blue.cgColor)
+        view.layer.addSublayer(layer)
+        self.addAnimation(forLayer: layer, duration: 0.3)
     }
+    
+    func resetView() {
+        for subview in self.mainView.subviews {
+            subview.layer.sublayers?.removeAll()
+        }
+    }
+    
 }
