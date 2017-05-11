@@ -131,6 +131,7 @@ class TicTacToeView: UIView {
         }
         let path = self.createLinePath(from: firstPoint, to: secondPoint)
         let layer = self.createLayer(forPath: path.cgPath, color: UIColor.green.cgColor)
+        layer.name = "WinningLine"
         self.mainView.layer.addSublayer(layer)
         self.addAnimation(forLayer: layer, duration: 0.3)
     }
@@ -147,7 +148,13 @@ class TicTacToeView: UIView {
         for subview in self.mainView.subviews {
             subview.layer.sublayers?.removeAll()
         }
-        self.mainView.layer.sublayers?.removeLast()
+        self.mainView.layer.sublayers?.first(where: { layer in
+            if layer.name != nil && layer.name! == "WinningLine" {
+                return true
+            } else {
+                return false
+            }
+        })?.removeFromSuperlayer()
     }
     
 }
