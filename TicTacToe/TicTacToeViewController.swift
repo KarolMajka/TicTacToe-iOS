@@ -45,15 +45,18 @@ class TicTacToeViewController: UIViewController {
         }
         CATransaction.begin()
         CATransaction.setCompletionBlock({
-            CATransaction.lock()
-            CATransaction.unlock()
             let values = self.ticTacToe.checkWinner()
             guard let playerEnum = values.0,
                 let combination = values.1 else {
                     self.noWinner()
                     return
             }
-            self.restartGame()
+            CATransaction.begin()
+            CATransaction.setCompletionBlock({
+                self.restartGame()
+            })
+            self.mainView.drawWinningLine(combination: combination)
+            CATransaction.commit()
         })
         
         if self.ticTacToe.getCurrentMove() == PlayerEnum.crossPlayer {

@@ -33,7 +33,6 @@ class TicTacToeView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(view)
         self.mainView = view
-        
         let centerX = NSLayoutConstraint.init(item: view, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1.0, constant: 0)
         let centerY = NSLayoutConstraint.init(item: view, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerY, multiplier: 1.0, constant: 0)
         let widthConstraint = NSLayoutConstraint.init(item: view, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.width, multiplier: 1.0, constant: 0)
@@ -109,10 +108,43 @@ class TicTacToeView: UIView {
         self.addAnimation(forLayer: layer, duration: 0.3)
     }
     
+    func drawWinningLine(combination: [Int]) {
+        let firstView = self.mainView.viewWithTag(min(combination[0], combination[1], combination[2])+100)!
+        let secondView = self.mainView.viewWithTag(max(combination[0], combination[1], combination[2])+100)!
+        var firstPoint: CGPoint
+        var secondPoint: CGPoint
+        if compareEqual(combination[0], combination[1] - 1, combination[2] - 2) || compareEqual(combination[0], combination[1] + 1, combination[2] + 2) {
+            firstPoint = CGPoint(x: firstView.frame.origin.x+firstView.frame.size.width/2, y: firstView.frame.origin.y+firstView.frame.size.height/2)
+            secondPoint = CGPoint(x: secondView.frame.origin.x+secondView.frame.size.width/2, y: secondView.frame.origin.y+secondView.frame.size.height/2)
+            
+        } else if compareEqual(combination[0], combination[1] + 3, combination[2] + 6) || compareEqual(combination[0], combination[1] - 3, combination[2] - 6) {
+            firstPoint = CGPoint(x: firstView.frame.origin.x+firstView.frame.size.width/2, y: firstView.frame.origin.y+firstView.frame.size.height/2)
+            secondPoint = CGPoint(x: secondView.frame.origin.x+secondView.frame.size.width/2, y: secondView.frame.origin.y+secondView.frame.size.height/2)
+            
+        } else {
+            firstPoint = CGPoint(x: firstView.frame.origin.x+firstView.frame.size.width/2, y: firstView.frame.origin.y+firstView.frame.size.height/2)
+            secondPoint = CGPoint(x: secondView.frame.origin.x+secondView.frame.size.width/2, y: secondView.frame.origin.y+secondView.frame.size.height/2)
+            
+        }
+        let path = self.createLinePath(from: firstPoint, to: secondPoint)
+        let layer = self.createLayer(forPath: path.cgPath, color: UIColor.green.cgColor)
+        self.mainView.layer.addSublayer(layer)
+        self.addAnimation(forLayer: layer, duration: 0.3)
+    }
+    
+    private func compareEqual(_ val1: Int, _ val2: Int, _ val3: Int) -> Bool {
+        if val1 == val2 && val1 == val3 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func resetView() {
         for subview in self.mainView.subviews {
             subview.layer.sublayers?.removeAll()
         }
+        self.mainView.layer.sublayers?.removeLast()
     }
     
 }
