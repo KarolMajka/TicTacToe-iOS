@@ -15,7 +15,7 @@ class TicTacToeViewController: UIViewController {
     private var ticTacToe = TicTacToeModel()
     
     var bot = false
-    let botManagement = TicTacToeBot()
+    let botManagement = TicTacToeBot(side: PlayerEnum.crossPlayer)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,7 +85,8 @@ class TicTacToeViewController: UIViewController {
     }
     
     private func botMove() {
-        let viewID = botManagement.move(field: ticTacToe)
+        let viewID = botManagement.getMove(model: self.ticTacToe)
+        let _ = self.ticTacToe.setField(at: viewID)
         CATransaction.begin()
         CATransaction.setCompletionBlock({
             let values = self.ticTacToe.checkWinner()
