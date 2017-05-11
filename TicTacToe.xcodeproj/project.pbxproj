@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A38E713A1EC467C100436C64 /* TicTacToeBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38E71391EC467C100436C64 /* TicTacToeBot.swift */; };
 		A3A099FA1EBB61210010A3A7 /* TicTacToeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A099F91EBB61210010A3A7 /* TicTacToeView.swift */; };
 		A3A099FC1EBC6EE00010A3A7 /* TicTacToeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3A099FB1EBC6EE00010A3A7 /* TicTacToeView.xib */; };
 		A3A099FE1EBC8CEF0010A3A7 /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A099FD1EBC8CEF0010A3A7 /* TicTacToeViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A38E71391EC467C100436C64 /* TicTacToeBot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicTacToeBot.swift; sourceTree = "<group>"; };
 		A3A099F91EBB61210010A3A7 /* TicTacToeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicTacToeView.swift; sourceTree = "<group>"; };
 		A3A099FB1EBC6EE00010A3A7 /* TicTacToeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicTacToeView.xib; sourceTree = "<group>"; };
 		A3A099FD1EBC8CEF0010A3A7 /* TicTacToeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicTacToeViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				A3AE4FD21EBB0D1500C0129E /* Main.storyboard */,
 				A3A099F91EBB61210010A3A7 /* TicTacToeView.swift */,
 				A3A099FD1EBC8CEF0010A3A7 /* TicTacToeViewController.swift */,
+				A38E71391EC467C100436C64 /* TicTacToeBot.swift */,
 				A3AE4FFF1EBB4EF000C0129E /* TicTacToeModel.swift */,
 				A3A099FB1EBC6EE00010A3A7 /* TicTacToeView.xib */,
 				A3AE4FD81EBB0D1500C0129E /* Assets.xcassets */,
@@ -284,6 +287,7 @@
 				A3A099FE1EBC8CEF0010A3A7 /* TicTacToeViewController.swift in Sources */,
 				A3AE4FD11EBB0D1500C0129E /* ViewController.swift in Sources */,
 				A3AE4FCF1EBB0D1500C0129E /* AppDelegate.swift in Sources */,
+				A38E713A1EC467C100436C64 /* TicTacToeBot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

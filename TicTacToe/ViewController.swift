@@ -20,6 +20,15 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else {
+            return
+        }
+        if identifier == "Bot" {
+            let vc = segue.destination as! TicTacToeViewController
+            vc.bot = true
+        }
+    }
 
 }
 

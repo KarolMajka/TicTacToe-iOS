@@ -82,7 +82,8 @@ class TicTacToeView: UIView {
         layer.add(animation, forKey: "animate")
     }
     
-    func drawCircle(in view: UIView) {
+    func drawCircle(in viewID: Int) {
+        let view = self.mainView.viewWithTag(viewID+100)!
         let size = view.frame.size
         
         let circlePath = UIBezierPath(arcCenter: CGPoint(x: size.width/2,y: size.height/2), radius: CGFloat(size.height/3), startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true)
@@ -94,8 +95,10 @@ class TicTacToeView: UIView {
     }
     
     
-    func drawCross(in view: UIView) {
+    func drawCross(in viewID: Int) {
+        let view = self.mainView.viewWithTag(viewID+100)!
         let size = view.frame.size
+        
         let crossPath = CGMutablePath()
         let crossPath1 = self.createLinePath(from: CGPoint(x: size.width/4, y: size.height/4), to: CGPoint(x: size.width*3/4, y: size.height*3/4))
         let crossPath2 = self.createLinePath(from: CGPoint(x: size.width*3/4, y: size.height/4), to: CGPoint(x: size.width/4, y: size.height*3/4))
