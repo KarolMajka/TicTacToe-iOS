@@ -46,7 +46,7 @@
                                 <state key="normal" title="Play via WiFi"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="9eM-qG-Oo0" firstAttribute="leading" secondItem="T3s-J4-ZL8" secondAttribute="leading" id="1kA-vj-Rp3"/>
                             <constraint firstItem="3nP-Fc-phQ" firstAttribute="height" secondItem="T3s-J4-ZL8" secondAttribute="height" id="5Hs-4k-E2v"/>
@@ -83,13 +83,13 @@
                         <subviews>
                             <view tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2O-Dq-TPf" customClass="TicTacToeView" customModule="TicTacToe" customModuleProvider="target">
                                 <rect key="frame" x="16" y="162" width="343" height="343"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="N2O-Dq-TPf" secondAttribute="height" multiplier="1:1" id="GqJ-ll-Iyd"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.32810157540000001" green="0.74566859009999997" blue="0.67782312629999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="N2O-Dq-TPf" firstAttribute="trailing" secondItem="A33-VJ-loV" secondAttribute="trailingMargin" id="Jdx-zS-GgI"/>
                             <constraint firstItem="N2O-Dq-TPf" firstAttribute="centerY" secondItem="A33-VJ-loV" secondAttribute="centerY" id="S2Y-Hc-Zsd"/>
@@ -107,6 +107,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="sJH-sH-idN"/>
+        <segue reference="iSh-Qc-nJv"/>
     </inferredMetricsTieBreakers>
 </document>

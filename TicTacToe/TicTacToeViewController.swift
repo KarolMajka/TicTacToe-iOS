@@ -71,7 +71,7 @@ class TicTacToeViewController: UIViewController {
                 self.restartGame()
                 self.mainView.isUserInteractionEnabled = true
             })
-            self.mainView.drawWinningLine(combination: combination)
+            self.drawWinningLine(combination: combination)
             CATransaction.commit()
         })
         
@@ -100,7 +100,7 @@ class TicTacToeViewController: UIViewController {
                 self.restartGame()
                 self.mainView.isUserInteractionEnabled = true
             })
-            self.mainView.drawWinningLine(combination: combination)
+            self.drawWinningLine(combination: combination)
             CATransaction.commit()
         })
         
@@ -110,6 +110,14 @@ class TicTacToeViewController: UIViewController {
             self.mainView.drawCross(in: viewID)
         }
         CATransaction.commit()
+    }
+    
+    private func drawWinningLine(combination: [Int]) {
+        if self.ticTacToe.getCurrentMove() == PlayerEnum.circlePlayer {
+            self.mainView.drawWinningLine(combination: combination, winner: PlayerEnum.crossPlayer)
+        } else {
+            self.mainView.drawWinningLine(combination: combination, winner: PlayerEnum.circlePlayer)
+        }
     }
     
     private func restartGame() {

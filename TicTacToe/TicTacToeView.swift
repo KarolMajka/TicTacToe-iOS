@@ -12,6 +12,9 @@ import UIKit
 class TicTacToeView: UIView {
     
     var mainView: UIView!
+    let crossColor = UIColor(colorLiteralRed: 242/255, green: 233/255, blue: 211/255, alpha: 1.0)
+    let circleColor = UIColor(colorLiteralRed: 84/255, green: 84/255, blue: 84/255, alpha: 1.0)
+    let lineColor = UIColor(colorLiteralRed: 70/255, green: 162/255, blue: 146/255, alpha: 1.0)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,7 +53,7 @@ class TicTacToeView: UIView {
     
     private func addLine(from: CGPoint, to: CGPoint) {
         let path = self.createLinePath(from: from, to: to)
-        let layer = self.createLayer(forPath: path.cgPath, color: UIColor.blue.cgColor)
+        let layer = self.createLayer(forPath: path.cgPath, color: lineColor.cgColor)
         self.mainView.layer.addSublayer(layer)
     }
     
@@ -67,7 +70,7 @@ class TicTacToeView: UIView {
         let layer = CAShapeLayer()
         
         layer.path = path
-        layer.lineWidth = 4
+        layer.lineWidth = 6
         layer.strokeColor = color
         layer.fillColor = UIColor.clear.cgColor
         return layer
@@ -88,10 +91,11 @@ class TicTacToeView: UIView {
         
         let circlePath = UIBezierPath(arcCenter: CGPoint(x: size.width/2,y: size.height/2), radius: CGFloat(size.height/3), startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true)
         
-        let layer = self.createLayer(forPath: circlePath.cgPath, color: UIColor.blue.cgColor)
+        let layer = self.createLayer(forPath: circlePath.cgPath, color: circleColor.cgColor)
+        layer.name = "Circle"
         //layer.strokeEnd = 0.0
         view.layer.addSublayer(layer)
-        self.addAnimation(forLayer: layer, duration: 0.3)
+        self.addAnimation(forLayer: layer, duration: 0.2)
     }
     
     
@@ -106,31 +110,43 @@ class TicTacToeView: UIView {
         crossPath.addPath(crossPath1.cgPath)
         crossPath.addPath(crossPath2.cgPath)
         
-        let layer = self.createLayer(forPath: crossPath, color: UIColor.blue.cgColor)
+        let layer = self.createLayer(forPath: crossPath, color: crossColor.cgColor)
+        layer.name = "Cross"
         view.layer.addSublayer(layer)
-        self.addAnimation(forLayer: layer, duration: 0.3)
+        self.addAnimation(forLayer: layer, duration: 0.2)
     }
     
-    func drawWinningLine(combination: [Int]) {
+    func drawWinningLine(combination: [Int], winner: PlayerEnum) {
         let firstView = self.mainView.viewWithTag(min(combination[0], combination[1], combination[2])+100)!
         let secondView = self.mainView.viewWithTag(max(combination[0], combination[1], combination[2])+100)!
         var firstPoint: CGPoint
         var secondPoint: CGPoint
         if compareEqual(combination[0], combination[1] - 1, combination[2] - 2) || compareEqual(combination[0], combination[1] + 1, combination[2] + 2) {
-            firstPoint = CGPoint(x: firstView.frame.origin.x+firstView.frame.size.width/2, y: firstView.frame.origin.y+firstView.frame.size.height/2)
-            secondPoint = CGPoint(x: secondView.frame.origin.x+secondView.frame.size.width/2, y: secondView.frame.origin.y+secondView.frame.size.height/2)
+            firstPoint = CGPoint(x: firstView.frame.origin.x, y: firstView.frame.origin.y+firstView.frame.size.height/2)
+            secondPoint = CGPoint(x: secondView.frame.origin.x+secondView.frame.size.width, y: secondView.frame.origin.y+secondView.frame.size.height/2)
             
         } else if compareEqual(combination[0], combination[1] + 3, combination[2] + 6) || compareEqual(combination[0], combination[1] - 3, combination[2] - 6) {
-            firstPoint = CGPoint(x: firstView.frame.origin.x+firstView.frame.size.width/2, y: firstView.frame.origin.y+firstView.frame.size.height/2)
-            secondPoint = CGPoint(x: secondView.frame.origin.x+secondView.frame.size.width/2, y: secondView.frame.origin.y+secondView.frame.size.height/2)
+            firstPoint = CGPoint(x: firstView.frame.origin.x+firstView.frame.size.width/2, y: firstView.frame.origin.y)
+            secondPoint = CGPoint(x: secondView.frame.origin.x+secondView.frame.size.width/2, y: secondView.frame.origin.y+secondView.frame.size.height)
+            
+        } else if firstView.tag == 100 {
+            firstPoint = CGPoint(x: firstView.frame.origin.x, y: firstView.frame.origin.y)
+            secondPoint = CGPoint(x: secondView.frame.origin.x+secondView.frame.size.width, y: secondView.frame.origin.y+secondView.frame.size.height)
             
         } else {
-            firstPoint = CGPoint(x: firstView.frame.origin.x+firstView.frame.size.width/2, y: firstView.frame.origin.y+firstView.frame.size.height/2)
-            secondPoint = CGPoint(x: secondView.frame.origin.x+secondView.frame.size.width/2, y: secondView.frame.origin.y+secondView.frame.size.height/2)
-            
+            firstPoint = CGPoint(x: firstView.frame.origin.x+firstView.frame.size.width, y: firstView.frame.origin.y)
+            secondPoint = CGPoint(x: secondView.frame.origin.x, y: secondView.frame.origin.y+secondView.frame.size.height)
         }
         let path = self.createLinePath(from: firstPoint, to: secondPoint)
-        let layer = self.createLayer(forPath: path.cgPath, color: UIColor.green.cgColor)
+        
+        var color: CGColor
+        if PlayerEnum.circlePlayer == winner {
+            color = circleColor.cgColor
+        } else {
+            color = crossColor.cgColor
+        }
+        
+        let layer = self.createLayer(forPath: path.cgPath, color: color)
         layer.name = "WinningLine"
         self.mainView.layer.addSublayer(layer)
         self.addAnimation(forLayer: layer, duration: 0.3)
