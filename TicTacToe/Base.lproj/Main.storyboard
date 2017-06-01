@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qSE-9r-hKS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,6 +11,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="7RE-6s-RAq">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="qSE-9r-hKS" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lYq-Nc-o8W">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="bVa-fg-fXI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cTG-E1-pYc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-786" y="139"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -24,25 +40,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3s-J4-ZL8">
-                                <rect key="frame" x="123" y="130" width="129" height="30"/>
+                                <rect key="frame" x="123" y="174" width="129" height="30"/>
                                 <state key="normal" title="Play on one device"/>
                                 <connections>
-                                    <segue destination="bvt-uS-rwT" kind="show" identifier="Player" id="sJH-sH-idN"/>
+                                    <segue destination="bvt-uS-rwT" kind="show" identifier="Player" id="DMy-9M-NNa"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eM-qG-Oo0">
-                                <rect key="frame" x="123" y="260" width="129" height="30"/>
+                                <rect key="frame" x="123" y="304" width="129" height="30"/>
                                 <state key="normal" title="Play with bot"/>
                                 <connections>
-                                    <segue destination="bvt-uS-rwT" kind="show" identifier="Bot" action="showDetailViewController:sender:" id="iSh-Qc-nJv"/>
+                                    <segue destination="bvt-uS-rwT" kind="show" identifier="Bot" id="9nR-Rz-e8g"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3nP-Fc-phQ">
-                                <rect key="frame" x="123" y="390" width="129" height="30"/>
+                                <rect key="frame" x="123" y="434" width="129" height="30"/>
                                 <state key="normal" title="Play via Bluetooth"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hmE-Yn-MfM">
-                                <rect key="frame" x="123" y="520" width="129" height="30"/>
+                                <rect key="frame" x="123" y="564" width="129" height="30"/>
                                 <state key="normal" title="Play via WiFi"/>
                             </button>
                         </subviews>
@@ -64,6 +80,7 @@
                             <constraint firstItem="hmE-Yn-MfM" firstAttribute="height" secondItem="T3s-J4-ZL8" secondAttribute="height" id="tfw-em-ZXk"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="fkX-aK-JnF"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -88,25 +105,58 @@
                                     <constraint firstAttribute="width" secondItem="N2O-Dq-TPf" secondAttribute="height" multiplier="1:1" id="GqJ-ll-Iyd"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2K3-fw-yAg" customClass="ExpandButtonView" customModule="TicTacToe" customModuleProvider="target">
+                                <rect key="frame" x="8" y="20" width="60" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBA-nv-eto">
+                                        <rect key="frame" x="8" y="13" width="8" height="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="49S-0J-302"/>
+                                            <constraint firstAttribute="width" constant="8" id="ZEm-t6-oGc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="12" minY="0.0" maxX="-40" maxY="0.0"/>
+                                        <state key="normal" title="Back" backgroundImage="arrowBack">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tapBackButton" destination="bvt-uS-rwT" eventType="touchUpInside" id="fSQ-cL-xAE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="79t-bt-XmE"/>
+                                    <constraint firstAttribute="height" constant="40" id="pTb-Pn-J9S"/>
+                                    <constraint firstItem="YBA-nv-eto" firstAttribute="centerY" secondItem="2K3-fw-yAg" secondAttribute="centerY" id="reO-im-fau"/>
+                                    <constraint firstItem="YBA-nv-eto" firstAttribute="leading" secondItem="2K3-fw-yAg" secondAttribute="leading" constant="8" id="wdg-U4-x3X"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.32810157540000001" green="0.74566859009999997" blue="0.67782312629999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="2K3-fw-yAg" firstAttribute="top" secondItem="ZW8-lU-IKa" secondAttribute="bottom" id="3hV-wF-NuX"/>
+                            <constraint firstItem="2K3-fw-yAg" firstAttribute="leading" secondItem="A33-VJ-loV" secondAttribute="leading" constant="8" id="JJH-sf-Hs0"/>
                             <constraint firstItem="N2O-Dq-TPf" firstAttribute="trailing" secondItem="A33-VJ-loV" secondAttribute="trailingMargin" id="Jdx-zS-GgI"/>
                             <constraint firstItem="N2O-Dq-TPf" firstAttribute="centerY" secondItem="A33-VJ-loV" secondAttribute="centerY" id="S2Y-Hc-Zsd"/>
                             <constraint firstItem="N2O-Dq-TPf" firstAttribute="leading" secondItem="A33-VJ-loV" secondAttribute="leadingMargin" id="YAw-O4-Pwz"/>
                             <constraint firstItem="N2O-Dq-TPf" firstAttribute="centerX" secondItem="A33-VJ-loV" secondAttribute="centerX" id="oqh-as-SEP"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="qtg-YF-0Un"/>
                     <connections>
                         <outlet property="mainView" destination="N2O-Dq-TPf" id="SLK-yr-qGU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J2N-gQ-VKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1213.5999999999999" y="138.98050974512745"/>
+            <point key="canvasLocation" x="969" y="139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrowBack" width="20" height="36"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iSh-Qc-nJv"/>
+        <segue reference="9nR-Rz-e8g"/>
     </inferredMetricsTieBreakers>
 </document>

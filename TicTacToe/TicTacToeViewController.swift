@@ -10,13 +10,16 @@ import Foundation
 import UIKit
 
 class TicTacToeViewController: UIViewController {
-
+    
+    //MARK: - variables
     @IBOutlet private var mainView: TicTacToeView!
     private var ticTacToe = TicTacToeModel()
     
     var bot = false
     let botManagement = TicTacToeBot(side: PlayerEnum.crossPlayer)
     
+    
+    //MARK: - UIViewController methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +36,8 @@ class TicTacToeViewController: UIViewController {
         }
     }
     
+    
+    //MARK: - IBAction methods
     @objc private func tapSingleField(_ sender: UITapGestureRecognizer) {
         self.mainView.isUserInteractionEnabled = false
         for subview in self.mainView.mainView.subviews {
@@ -53,6 +58,12 @@ class TicTacToeViewController: UIViewController {
         }
     }
     
+    @IBAction private func tapBackButton() {
+        self.navigationController!.popViewController(animated: true)
+    }
+    
+    
+    //MARK: - TicTacToe methods
     private func move(_ viewID: Int) {
         CATransaction.begin()
         CATransaction.setCompletionBlock({
@@ -84,6 +95,32 @@ class TicTacToeViewController: UIViewController {
 
     }
     
+    
+    private func drawWinningLine(combination: [Int]) {
+        if self.ticTacToe.getCurrentMove() == PlayerEnum.circlePlayer {
+            self.mainView.drawWinningLine(combination: combination, winner: PlayerEnum.crossPlayer)
+        } else {
+            self.mainView.drawWinningLine(combination: combination, winner: PlayerEnum.circlePlayer)
+        }
+    }
+    
+    private func restartGame() {
+        self.ticTacToe = TicTacToeModel()
+        self.mainView.resetView()
+        if self.bot && self.ticTacToe.getCurrentMove() == PlayerEnum.crossPlayer {
+            self.botMove()
+        }
+    }
+    
+    private func noWinner() -> Bool {
+        if !self.ticTacToe.isMoveAvailable() {
+            self.restartGame()
+            
+            return true
+        }
+        return false
+    }
+    
     private func botMove() {
         let viewID = botManagement.getMove(model: self.ticTacToe)
         let _ = self.ticTacToe.setField(at: viewID)
@@ -113,28 +150,5 @@ class TicTacToeViewController: UIViewController {
         CATransaction.commit()
     }
     
-    private func drawWinningLine(combination: [Int]) {
-        if self.ticTacToe.getCurrentMove() == PlayerEnum.circlePlayer {
-            self.mainView.drawWinningLine(combination: combination, winner: PlayerEnum.crossPlayer)
-        } else {
-            self.mainView.drawWinningLine(combination: combination, winner: PlayerEnum.circlePlayer)
-        }
-    }
     
-    private func restartGame() {
-        self.ticTacToe = TicTacToeModel()
-        self.mainView.resetView()
-        if self.bot && self.ticTacToe.getCurrentMove() == PlayerEnum.crossPlayer {
-            self.botMove()
-        }
-    }
-    
-    private func noWinner() -> Bool {
-        if !self.ticTacToe.isMoveAvailable() {
-            self.restartGame()
-            
-            return true
-        }
-        return false
-    }
 }
