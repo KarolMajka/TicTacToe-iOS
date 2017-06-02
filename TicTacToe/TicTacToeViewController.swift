@@ -24,8 +24,18 @@ class TicTacToeViewController: UIViewController {
         super.viewDidLoad()
         
         self.setGestureRecognizers()
-        if self.bot && self.ticTacToe.getCurrentMove() == PlayerEnum.crossPlayer {
-            self.botMove()
+        self.mainView.isUserInteractionEnabled = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if self.isBeingPresented || self.isMovingToParentViewController {
+            if self.bot && self.ticTacToe.getCurrentMove() == PlayerEnum.crossPlayer {
+                self.botMove()
+            } else {
+                self.mainView.isUserInteractionEnabled = true
+            }
         }
     }
     
