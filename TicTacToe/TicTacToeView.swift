@@ -85,7 +85,11 @@ class TicTacToeView: UIView {
         layer.add(animation, forKey: "animate")
     }
     
-    func drawCircle(in viewID: Int) {
+    func drawCircle(in viewID: Int, completion: @escaping ()->()) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock({
+            completion()
+        })
         let view = self.mainView.viewWithTag(viewID+100)!
         let size = view.frame.size
         
@@ -96,10 +100,15 @@ class TicTacToeView: UIView {
         //layer.strokeEnd = 0.0
         view.layer.addSublayer(layer)
         self.addAnimation(forLayer: layer, duration: 0.2)
+        CATransaction.commit()
     }
     
     
-    func drawCross(in viewID: Int) {
+    func drawCross(in viewID: Int, completion: @escaping ()->()) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock({
+            completion()
+        })
         let view = self.mainView.viewWithTag(viewID+100)!
         let size = view.frame.size
         
@@ -114,9 +123,14 @@ class TicTacToeView: UIView {
         layer.name = "Cross"
         view.layer.addSublayer(layer)
         self.addAnimation(forLayer: layer, duration: 0.2)
+        CATransaction.commit()
     }
     
-    func drawWinningLine(combination: [Int], winner: PlayerEnum) {
+    func drawWinningLine(combination: [Int], winner: PlayerEnum, completion: @escaping ()->()) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock({
+            completion()
+        })
         let firstView = self.mainView.viewWithTag(min(combination[0], combination[1], combination[2])+100)!
         let secondView = self.mainView.viewWithTag(max(combination[0], combination[1], combination[2])+100)!
         var firstPoint: CGPoint
@@ -150,6 +164,7 @@ class TicTacToeView: UIView {
         layer.name = "WinningLine"
         self.mainView.layer.addSublayer(layer)
         self.addAnimation(forLayer: layer, duration: 0.3)
+        CATransaction.commit()
     }
     
     private func compareEqual(_ val1: Int, _ val2: Int, _ val3: Int) -> Bool {

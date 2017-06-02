@@ -74,9 +74,8 @@ class TicTacToeViewController: UIViewController {
     
     
     //MARK: - TicTacToe methods
-    private func move(_ viewID: Int) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock({
+    private func move(_ viewId: Int) {
+        self.drawNextMove(viewId: viewId, completion: {
             let values = self.ticTacToe.checkWinner()
             guard let playerEnum = values.0,
                 let combination = values.1 else {
@@ -87,30 +86,26 @@ class TicTacToeViewController: UIViewController {
                     }
                     return
             }
-            CATransaction.begin()
-            CATransaction.setCompletionBlock({
+            self.drawWinningLine(combination: combination, completion: {
                 self.restartGame()
                 self.mainView.isUserInteractionEnabled = true
             })
-            self.drawWinningLine(combination: combination)
-            CATransaction.commit()
         })
-        
-        if self.ticTacToe.getCurrentMove() == PlayerEnum.crossPlayer {
-            self.mainView.drawCircle(in: viewID)
-        } else {
-            self.mainView.drawCross(in: viewID)
-        }
-        CATransaction.commit()
+    }
 
+    private func drawNextMove(viewId: Int, completion: @escaping ()->()) {
+        if self.ticTacToe.getCurrentMove() == PlayerEnum.crossPlayer {
+            self.mainView.drawCircle(in: viewId, completion: completion)
+        } else {
+            self.mainView.drawCross(in: viewId, completion: completion)
+        }
     }
     
-    
-    private func drawWinningLine(combination: [Int]) {
+    private func drawWinningLine(combination: [Int], completion: @escaping () ->()) {
         if self.ticTacToe.getCurrentMove() == PlayerEnum.circlePlayer {
-            self.mainView.drawWinningLine(combination: combination, winner: PlayerEnum.crossPlayer)
+            self.mainView.drawWinningLine(combination: combination, winner: PlayerEnum.crossPlayer, completion: completion)
         } else {
-            self.mainView.drawWinningLine(combination: combination, winner: PlayerEnum.circlePlayer)
+            self.mainView.drawWinningLine(combination: combination, winner: PlayerEnum.circlePlayer, completion: completion)
         }
     }
     
@@ -132,10 +127,9 @@ class TicTacToeViewController: UIViewController {
     }
     
     private func botMove() {
-        let viewID = botManagement.getMove(model: self.ticTacToe)
-        let _ = self.ticTacToe.setField(at: viewID)
-        CATransaction.begin()
-        CATransaction.setCompletionBlock({
+        let viewId = botManagement.getMove(model: self.ticTacToe)
+        let _ = self.ticTacToe.setField(at: viewId)
+        self.drawNextMove(viewId: viewId, completion: {
             let values = self.ticTacToe.checkWinner()
             guard let playerEnum = values.0,
                 let combination = values.1 else {
@@ -143,21 +137,11 @@ class TicTacToeViewController: UIViewController {
                     self.mainView.isUserInteractionEnabled = true
                     return
             }
-            CATransaction.begin()
-            CATransaction.setCompletionBlock({
+            self.drawWinningLine(combination: combination, completion: {
                 self.restartGame()
                 self.mainView.isUserInteractionEnabled = true
             })
-            self.drawWinningLine(combination: combination)
-            CATransaction.commit()
         })
-        
-        if self.ticTacToe.getCurrentMove() == PlayerEnum.crossPlayer {
-            self.mainView.drawCircle(in: viewID)
-        } else {
-            self.mainView.drawCross(in: viewID)
-        }
-        CATransaction.commit()
     }
     
     
